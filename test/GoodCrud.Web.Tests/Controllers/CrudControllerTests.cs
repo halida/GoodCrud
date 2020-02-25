@@ -11,6 +11,7 @@ using GoodCrud.Web.Tests.Helpers;
 using System.Linq;
 using System;
 using System.Text.RegularExpressions;
+using GoodCrud.Web.Helpers;
 
 namespace GoodCrud.Web.Tests.Controllers
 {
@@ -52,8 +53,8 @@ namespace GoodCrud.Web.Tests.Controllers
                 response.EnsureSuccessStatusCode();
                 var result = await ParseResponse(response);
                 Assert.Contains("Create Book", result);
-                authToken = Utilities.ExtractAntiForgeryToken(result);
-                cookie = Utilities.ExtractCookie(response);
+                authToken = Testing.ExtractAntiForgeryToken(result);
+                cookie = Testing.ExtractCookie(response);
             }
 
             // create
@@ -93,8 +94,8 @@ namespace GoodCrud.Web.Tests.Controllers
                 response.EnsureSuccessStatusCode();
                 var result = await ParseResponse(response);
                 Assert.Contains("Edit Book", result);
-                authToken = Utilities.ExtractAntiForgeryToken(result);
-                cookie = Utilities.ExtractCookie(response);
+                authToken = Testing.ExtractAntiForgeryToken(result);
+                cookie = Testing.ExtractCookie(response);
             }
 
             // update

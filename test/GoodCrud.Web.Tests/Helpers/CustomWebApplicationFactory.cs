@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using Books.Data;
+using GoodCrud.Web.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -16,14 +16,7 @@ namespace GoodCrud.Web.Tests.Helpers
         {
             builder.ConfigureServices(services =>
             {
-                // Remove the app's ApplicationDbContext registration.
-                var descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<Context>));
-
-                if (descriptor != null)
-                {
-                    services.Remove(descriptor);
-                }
+                Testing.RemoveService(services, typeof(DbContextOptions<Context>));
 
                 var serviceProvider = new ServiceCollection()
                     .AddEntityFrameworkInMemoryDatabase()
@@ -34,12 +27,6 @@ namespace GoodCrud.Web.Tests.Helpers
                     options.UseInMemoryDatabase("InMemoryEmployeeTest");
                     options.UseInternalServiceProvider(serviceProvider);
                 });
-
-                // // Add ApplicationDbContext using an in-memory database for testing.
-                // services.AddDbContext<Context>(options =>
-                // {
-                //     options.UseSqlite("DataSource=:memory:");
-                // });
 
                 // Build the service provider.
                 var sp = services.BuildServiceProvider();
