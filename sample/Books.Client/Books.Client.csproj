@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\GoodCrud.Client\GoodCrud.Client.csproj" />
+    <ProjectReference Include="..\Books.Application\Books.Application.csproj" />
+  </ItemGroup>
+
+</Project>

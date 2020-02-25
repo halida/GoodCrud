@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\GoodCrud.Application\GoodCrud.Application.csproj" />
+    <ProjectReference Include="..\Books.Domain\Books.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
