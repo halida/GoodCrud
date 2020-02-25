@@ -7,7 +7,7 @@ using GoodCrud.Contract.Dtos;
 using AutoMapper;
 using System.Threading.Tasks;
 using Books.Application;
-using Books.Data;
+using Books.Domain;
 using GoodCrud.Data.Tests.Helpers;
 
 namespace GoodCrud.Application.Tests.WebServices

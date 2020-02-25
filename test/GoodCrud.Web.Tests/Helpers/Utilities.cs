@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Books.Data;
+using Books.Domain;
 
 namespace GoodCrud.Web.Tests.Helpers
 {

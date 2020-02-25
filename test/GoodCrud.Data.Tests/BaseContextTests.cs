@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using Books.Domain;
 using Books.Data;
 using System.Threading;
 using GoodCrud.Data.Tests.Helpers;
