@@ -1,0 +1,14 @@
+@{
+    Layout = "~/Views/Shared/_Base.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var actionName = this.ViewContext.RouteData.Values["action"].ToString();
+}
+
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-action="Index">@controllerName</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@actionName</li>
+    </ol>
+</nav>
+
+@RenderBody()

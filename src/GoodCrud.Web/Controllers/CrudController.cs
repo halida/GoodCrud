@@ -71,7 +71,7 @@ namespace GoodCrud.Web.Controllers
         }
 
         [HttpPost("{id}/Edit")]
-        public async Task<IActionResult> Edit(int id, UpdateT dto)
+        public async Task<IActionResult> Update(int id, UpdateT dto)
         {
             if (ModelState.IsValid)
             {

@@ -1,9 +1,6 @@
 using System;
 using Books.Domain;
-using GoodCrud.Contract.Interfaces;
 using GoodCrud.Data;
-using GoodCrud.Domain;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace Books.Data

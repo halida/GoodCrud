@@ -1,0 +1,8 @@
+@model BookFilterDto
+<form asp-action="Index" method="get" class="form-inline mb-2">
+    <label class="mr-1">Title</label>
+    <input type="text" name="Title" value="@Model.Title" class="form-control mr-1">
+    <label class="mr-1">Description</label>
+    <input type="text" name="Description" value="@Model.Description" class="form-control mr-1">
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>

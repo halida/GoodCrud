@@ -1,0 +1,5 @@
+@model EntityDto
+<div class='p text-muted' title='Created at'>@Model.CreatedAt</div>
+@if (Model.UpdatedAt != Model.CreatedAt) {
+<div class='p text-muted' title='Updated at'>@Model.UpdatedAt</div>
+}

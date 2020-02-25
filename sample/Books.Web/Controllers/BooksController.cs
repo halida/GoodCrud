@@ -1,12 +1,11 @@
 using Books.Application;
 using Books.Domain;
-using GoodCrud.Web.Api.Controllers;
+using GoodCrud.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GoodCrud.Web.Books.Api
+namespace GoodCrud.Web.Books
 {
-    [Area("api")]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class BooksController : CrudController<BookWebService, Book, IBooksUnitOfWork, BookDto, BookCreateUpdateDto, BookCreateUpdateDto, BookFilterDto>
     {
         public BooksController(BookWebService service) : base(service) { }

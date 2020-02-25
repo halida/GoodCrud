@@ -1,0 +1,14 @@
+﻿@{
+    var errorMsg = TempData["alert-error"] as string;
+    var successMsg = TempData["alert-success"] as string;
+}
+
+@if (errorMsg != null)
+{
+    <div class="alert alert-danger" role="alert">@errorMsg</div>
+}
+
+@if (successMsg != null)
+{
+    <div class="alert alert-success" role="alert">@successMsg</div>
+}

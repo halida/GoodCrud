@@ -1,0 +1,41 @@
+@model IEnumerable<BookDto>
+
+<table class='table table-sm'>
+    <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>
+                Title / Description
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Show" asp-route-id="@item.Id">@item.Id</a>
+            <td>
+                <div class='p'>
+                    <span title="Title">@item.Title</span>
+                </div>
+                <div class='text-muted' title="Description">@item.Description</div>
+            </td>
+            <td>
+                <partial name="../Shared/_Timestamps" for="@item" />
+            </td>
+            <td>
+                <div class="muted float-right">
+                   <a asp-action="Edit" asp-route-id="@item.Id" class="muted">Edit</a>
+                   /
+                   <form asp-action="Delete" asp-route-id="@item.Id" style="display: inline">
+                       <button class="muted sweet-confirm btn btn-link p-0" type="submit" data-confirm="Are sure wants to delete category @item.Title?">Delete</button>
+                   </form>
+               </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

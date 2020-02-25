@@ -38,12 +38,6 @@ namespace GoodCrud.Web.Books
             services.AddScoped<BookWebService, BookWebService>();
 
             var builder = services.AddControllersWithViews();
-            builder.AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.IgnoreNullValues = true;
-                options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
-            });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +48,7 @@ namespace GoodCrud.Web.Books
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
 
@@ -63,6 +57,7 @@ namespace GoodCrud.Web.Books
                 endpoints.MapControllers();
             });
 
+            // create sql schema
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetService<Context>())

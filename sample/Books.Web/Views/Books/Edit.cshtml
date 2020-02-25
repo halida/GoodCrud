@@ -1,0 +1,36 @@
+@model BookCreateUpdateDto
+@{
+    var actionName = this.ViewContext.RouteData.Values["action"].ToString();
+    ViewData["Title"] = $"{actionName} Book";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="@actionName">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="card-title">Basic</h6> 
+
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" required />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" required />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@actionName" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-light">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

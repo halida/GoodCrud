@@ -5,8 +5,8 @@ namespace Books.Domain
 {
     public class Book : BaseEntity
     {
-        public string Title;
-        public string Description;
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 
     public interface IBooksUnitOfWork : IBaseUnitOfWork

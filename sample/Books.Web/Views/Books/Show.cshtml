@@ -1,0 +1,13 @@
+﻿@model BookDto
+@{
+    ViewData["Title"] = $"Books #{Model.Id} {Model.Title}";
+    var list = new List<BookDto>(){ Model };
+}
+
+<div class="card mb-3">
+    <div class="card-body table-responsive">
+
+        <partial name="_List" for="@list" />
+
+    </div>
+</div>

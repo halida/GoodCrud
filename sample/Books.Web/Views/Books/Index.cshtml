@@ -1,0 +1,19 @@
+﻿@model (BookFilterDto filter, PagedListDto<BookDto> pagedList)
+@{
+    ViewData["Title"] = "Books";
+}
+<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+    <div>
+        <h4 class="mb-3 mb-md-0">Books</h4>
+    </div>
+    <div class="d-flex align-items-center flex-wrap text-nowrap">
+        <a class="btn btn-primary" asp-action="Create">New Books</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body table-responsive">
+        <partial name="_Search" for="@Model.filter" />
+        @Html.ListView("_List", Model.pagedList)
+    </div>
+</div>
