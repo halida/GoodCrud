@@ -38,44 +38,38 @@ namespace GoodCrud.Client
         public virtual async Task<PagedListDto<T>> GetsAsync(FilterT filter = null)
         {
             var options = QueryOptions(filter);
-            var content = await Request($"{Prefix}/{Controller}", Method.GET, options);
-            var result = JsonConvert.DeserializeObject<PagedListDto<T>>(content);
-            return result;
+            return await RequestResult<PagedListDto<T>>(
+                $"{Prefix}/{Controller}", Method.GET, options);
         }
 
         public async Task<ResultDto<T>> GetAsync(int id)
         {
-            var content = await Request($"{Prefix}/{Controller}/{id}", Method.GET);
-            var result = JsonConvert.DeserializeObject<ResultDto<T>>(content);
-            return result;
+            return await RequestResult<ResultDto<T>>(
+                $"{Prefix}/{Controller}/{id}", Method.GET);
         }
 
         public async Task<ResultDto<T>> UpdateAsync(int id, UpdateT dto)
         {
-            var content = await Request($"{Prefix}/{Controller}/{id}", Method.PUT, null, dto);
-            var result = JsonConvert.DeserializeObject<ResultDto<T>>(content);
-            return result;
+            return await RequestResult<ResultDto<T>>(
+                $"{Prefix}/{Controller}/{id}", Method.PUT, null, dto);
         }
 
         public async Task<ResultDto<T>> CreateAsync(CreateT dto)
         {
-            var content = await Request($"{Prefix}/{Controller}/", Method.POST, null, dto);
-            var result = JsonConvert.DeserializeObject<ResultDto<T>>(content);
-            return result;
+            return await RequestResult<ResultDto<T>>(
+                $"{Prefix}/{Controller}/", Method.POST, null, dto);
         }
 
         public async Task<List<ResultDto<T>>> BulkCreateAsync(List<CreateT> dtoList)
         {
-            var content = await Request($"{Prefix}/{Controller}/Bulk", Method.POST, null, dtoList);
-            var result = JsonConvert.DeserializeObject<List<ResultDto<T>>>(content);
-            return result;
+            return await RequestResult<List<ResultDto<T>>>(
+                $"{Prefix}/{Controller}/Bulk", Method.POST, null, dtoList);
         }
 
         public async Task<ResultDto<T>> DeleteAsync(int id)
         {
-            var content = await Request($"{Prefix}/{Controller}/{id}", Method.DELETE);
-            var result = JsonConvert.DeserializeObject<ResultDto<T>>(content);
-            return result;
+            return await RequestResult<ResultDto<T>>(
+                $"{Prefix}/{Controller}/{id}", Method.DELETE);
         }
 
         public virtual async Task<string> Request(string url, Method method, StringDictionary options = null, dynamic data = null)
@@ -111,6 +105,13 @@ namespace GoodCrud.Client
                 options[property.Name] = Convert.ToString(property.GetValue(c));
             }
             return options;
+        }
+
+        public virtual async Task<CT> RequestResult<CT>(string url, Method method, StringDictionary options = null, dynamic data = null)
+        {
+            var content = await Request(url, method, options, data);
+            var result = JsonConvert.DeserializeObject<CT>(content);
+            return result;
         }
     }
 }

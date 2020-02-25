@@ -25,21 +25,26 @@ namespace Books.Console
                 System.Console.WriteLine(JsonConvert.SerializeObject(result));
             }
             // create
-            int bookId;
+            int entityId;
             {
                 var result = await client.CreateAsync(new BookCreateUpdateDto() { Title = "a2" });
                 System.Console.WriteLine(JsonConvert.SerializeObject(result));
-                bookId = result.Data.Id;
+                entityId = result.Data.Id;
+            }
+            // get
+            {
+                var result = await client.GetAsync(entityId);
+                System.Console.WriteLine(JsonConvert.SerializeObject(result));
             }
             // update
             {
-                var result = await client.UpdateAsync(bookId, new BookCreateUpdateDto() { Title = "a3" });
+                var result = await client.UpdateAsync(entityId, new BookCreateUpdateDto() { Title = "a3" });
                 System.Console.WriteLine(JsonConvert.SerializeObject(result));
             }
 
             // delete
             {
-                var result = await client.DeleteAsync(bookId);
+                var result = await client.DeleteAsync(entityId);
                 System.Console.WriteLine(JsonConvert.SerializeObject(result));
             }
 
