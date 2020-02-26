@@ -1,9 +1,6 @@
 using GoodCrud.Contract.Dtos;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using X.PagedList.Mvc.Core;
 using X.PagedList.Mvc.Bootstrap4.NetCore;
 using Microsoft.AspNetCore.Mvc.Routing;

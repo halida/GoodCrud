@@ -11,7 +11,6 @@ namespace GoodCrud.Contract.Interfaces
         Task DeleteAndSaveAsync(E entity);
 
         void DeleteAll();
-        DatabaseProvider GetDatabaseProvider();
         string TableName();
     }
 
@@ -20,7 +19,7 @@ namespace GoodCrud.Contract.Interfaces
         Unknown,
         Sqlite,
         InMemory,
-        Mysql,
+        MySql,
         SqlServer
     }
 

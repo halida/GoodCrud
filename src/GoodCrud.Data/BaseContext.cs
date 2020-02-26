@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 using GoodCrud.Domain;
+using GoodCrud.Contract.Interfaces;
 
 namespace GoodCrud.Data
 {
@@ -51,5 +52,18 @@ namespace GoodCrud.Data
             }
 
         }
+
+        public DatabaseProvider GetDatabaseProvider()
+        {
+            var s = Database.ProviderName;
+            switch (s)
+            {
+                case "Microsoft.EntityFrameworkCore.Sqlite": return DatabaseProvider.Sqlite;
+                case "Microsoft.EntityFrameworkCore.InMemory": return DatabaseProvider.InMemory;
+                case "Microsoft.EntityFrameworkCore.MySql": return DatabaseProvider.MySql;
+                default: return DatabaseProvider.Unknown;
+            }
+        }
+
     }
 }

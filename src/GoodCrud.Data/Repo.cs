@@ -12,7 +12,7 @@ namespace GoodCrud.Data
     where E : class, IIdentifiable
     where C : BaseContext
     {
-        public Repo(DbContext context) : base(context)
+        public Repo(C context) : base(context)
         {
         }
 
@@ -36,29 +36,18 @@ namespace GoodCrud.Data
 
         public void DeleteAll()
         {
-            switch (GetDatabaseProvider())
+            switch (((BaseContext)Context).GetDatabaseProvider())
             {
                 case DatabaseProvider.Sqlite:
                     Context.Database.ExecuteSqlRaw($"DELETE FROM \"{TableName()}\"");
                     break;
-                case DatabaseProvider.Mysql:
+                case DatabaseProvider.MySql:
                     Context.Database.ExecuteSqlRaw($"TRUNCATE TABLE \"{TableName()}\"");
                     break;
                 default:
                     foreach (var item in Set.ToList()) { Set.Remove(item); }
                     Context.SaveChanges();
                     break;
-            }
-        }
-
-        public DatabaseProvider GetDatabaseProvider()
-        {
-            var s = Context.Database.ProviderName;
-            switch (s)
-            {
-                case "Microsoft.EntityFrameworkCore.Sqlite": return DatabaseProvider.Sqlite;
-                case "Microsoft.EntityFrameworkCore.InMemory": return DatabaseProvider.InMemory;
-                default: return DatabaseProvider.Unknown;
             }
         }
 
