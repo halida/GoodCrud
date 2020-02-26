@@ -48,24 +48,11 @@ namespace GoodCrud.Application.WebServices
 
             // var pagedList = new StaticPagedList<ShowT>(showList, pageNumber, PageSize, total);
 
-            var metaData = pagedList.GetMetaData();
-            var copied = new GoodCrud.Contract.Dtos.PagedListMetaData()
-            {
-                PageCount = metaData.PageCount,
-                TotalItemCount = metaData.TotalItemCount,
-                PageNumber = metaData.PageNumber,
-                PageSize = metaData.PageSize,
-                HasPreviousPage = metaData.HasPreviousPage,
-                HasNextPage = metaData.HasNextPage,
-                IsFirstPage = metaData.IsFirstPage,
-                IsLastPage = metaData.IsLastPage,
-                FirstItemOnPage = metaData.FirstItemOnPage,
-                LastItemOnPage = metaData.LastItemOnPage,
-            };
+            var metaData = Mapper.Map<GoodCrud.Contract.Dtos.PagedListMetaData>(pagedList.GetMetaData());
             return new PagedListDto<ShowT>()
             {
                 List = pagedList.Select(e => EntityDto(e)).ToList(),
-                MetaData = copied,
+                MetaData = metaData,
             };
         }
 

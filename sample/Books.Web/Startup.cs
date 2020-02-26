@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
+using GoodCrud.Contract;
+using GoodCrud.Application;
 
 namespace GoodCrud.Web.Books
 {
@@ -33,7 +36,10 @@ namespace GoodCrud.Web.Books
 
             services.AddScoped<IBooksUnitOfWork, BooksUnitOfWork>();
 
-            services.AddAutoMapper();
+            services.AddAutoMapper((cfg) =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
 
             services.AddScoped<BookWebService, BookWebService>();
 

@@ -4,6 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />
+
     <ProjectReference Include="..\GoodCrud.Contract\GoodCrud.Contract.csproj" />
     <ProjectReference Include="..\GoodCrud.Domain\GoodCrud.Domain.csproj" />
   </ItemGroup>

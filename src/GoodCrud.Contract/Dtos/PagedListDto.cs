@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using X.PagedList;
 
 namespace GoodCrud.Contract.Dtos
 {
@@ -10,7 +9,7 @@ namespace GoodCrud.Contract.Dtos
     }
 
     // opens the sets
-    public class PagedListMetaData : IPagedList
+    public class PagedListMetaData
     {
         public int PageCount { get; set; }
         public int TotalItemCount { get; set; }
