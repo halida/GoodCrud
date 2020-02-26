@@ -50,6 +50,10 @@ namespace GoodCrud.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateT dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", dto);
+            }
             var result = await _service.CreateAsync(dto);
             FlashMessage(result);
             if (result.Status == ResultStatus.Succeed)
