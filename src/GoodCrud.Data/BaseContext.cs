@@ -9,7 +9,7 @@ using GoodCrud.Contract.Interfaces;
 
 namespace GoodCrud.Data
 {
-    public abstract class BaseContext : DbContext
+    public class BaseContext : DbContext
     {
         public BaseContext(DbContextOptions options) : base(options)
         {

@@ -26,7 +26,7 @@ namespace GoodCrud.Application.WebServices
         {
             Uow = uow;
             Mapper = mapper;
-            Repo = (IRepo<E>)Uow.GetRepo(typeof(E));
+            Repo = Uow.GetRepo<E>();
         }
 
         public async Task<PagedListDto<ShowT>> ListAsync(FilterT filter)

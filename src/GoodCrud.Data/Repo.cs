@@ -8,11 +8,10 @@ using URF.Core.EF;
 
 namespace GoodCrud.Data
 {
-    public abstract class Repo<E, C> : Repository<E>
+    public class Repo<E> : Repository<E>, IRepo<E>
     where E : class, IIdentifiable
-    where C : BaseContext
     {
-        public Repo(C context) : base(context)
+        public Repo(BaseContext context) : base(context)
         {
         }
 

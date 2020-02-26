@@ -5,16 +5,19 @@ using URF.Core.EF;
 
 namespace GoodCrud.Data
 {
-    public class BaseUnitOfWork<C> : UnitOfWork, IBaseUnitOfWork
-    where C : BaseContext
+    public class BaseUnitOfWork : UnitOfWork, IBaseUnitOfWork
     {
-        public BaseUnitOfWork(DbContext context) : base(context)
+        public BaseUnitOfWork(BaseContext context) : base(context)
         {
         }
 
-        public virtual object GetRepo(Type type)
+        public virtual IRepo<E> GetRepo<E>() where E : class, IIdentifiable
         {
-            throw new System.ArgumentException($"Cannot find repo for type: {type}");
+            return new Repo<E>((BaseContext)Context);
+        }
+        public virtual IRepo<E> GetRepo<E>(E ignored) where E : class, IIdentifiable
+        {
+            return GetRepo<E>();
         }
 
 
