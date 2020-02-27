@@ -24,8 +24,17 @@ namespace Books.Console
                 var result = await client.GetsAsync();
                 System.Console.WriteLine(JsonConvert.SerializeObject(result));
             }
+
+            int entityId = 0;
+            // get by title
+            {
+                var result = await client.GetsAsync(new BookFilterDto() { Title = "a2" });
+                if (result.List != null && result.List.Count > 0) { entityId = result.List[0].Id; }
+                System.Console.WriteLine(JsonConvert.SerializeObject(result));
+            }
+
             // create
-            int entityId;
+            if (entityId <= 0)
             {
                 var result = await client.CreateAsync(new BookCreateUpdateDto() { Title = "a2" });
                 System.Console.WriteLine(JsonConvert.SerializeObject(result));

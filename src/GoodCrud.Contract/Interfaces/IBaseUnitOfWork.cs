@@ -1,5 +1,4 @@
-﻿using System;
-using URF.Core.Abstractions;
+﻿using URF.Core.Abstractions;
 
 namespace GoodCrud.Contract.Interfaces
 {

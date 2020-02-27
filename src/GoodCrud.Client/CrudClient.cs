@@ -16,7 +16,7 @@ namespace GoodCrud.Client
     where UpdateT : class
     where FilterT : FilterDto
     {
-        public string Website = "https://api.mailgun.net/";
+        public string Website;
         public string Prefix;
         public string Controller;
 
