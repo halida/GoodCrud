@@ -17,6 +17,12 @@ namespace GoodCrud.Web.Helpers
             var mapper = (IMapper)htmlHelper.ViewContext.HttpContext.RequestServices.GetService(typeof(IMapper));
             var metaData = mapper.Map<X.PagedList.PagedListMetaData>(pagedList.MetaData);
 
+            var listContent = htmlHelper.Partial(viewName, pagedList.List);
+            if (metaData.TotalItemCount <= 0)
+            {
+                return new HtmlString("<div class='p-4 text-center' style='background: #fafafa'>Empty</div>");
+            }
+
             var paginationContent = htmlHelper.PagedListPager(
                 metaData, page =>
                 {
@@ -24,9 +30,6 @@ namespace GoodCrud.Web.Helpers
                     var uri = Common.GetUpdatedUri(request, "page", page.ToString());
                     return Microsoft.AspNetCore.WebUtilities.QueryHelpers.AddQueryString(uri, "page", page.ToString());
                 }, Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast);
-
-
-            var listContent = htmlHelper.Partial(viewName, pagedList.List);
 
             var content = new HtmlContentBuilder()
                 .AppendHtml(paginationContent)
