@@ -5,11 +5,11 @@ namespace GoodCrud.Contract.Dtos
     public class PagedListDto<T>
     {
         public List<T> List { get; set; }
-        public PagedListMetaData MetaData { get; set; }
+        public PagedListOpenMetaData MetaData { get; set; }
     }
 
     // opens the sets
-    public class PagedListMetaData
+    public class PagedListOpenMetaData
     {
         public int PageCount { get; set; }
         public int TotalItemCount { get; set; }

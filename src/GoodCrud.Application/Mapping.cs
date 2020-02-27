@@ -1,6 +1,8 @@
 using System;
 using AutoMapper;
+using GoodCrud.Contract.Dtos;
 using Microsoft.Extensions.DependencyInjection;
+using X.PagedList;
 
 namespace GoodCrud.Application
 {
@@ -25,8 +27,8 @@ namespace GoodCrud.Application
         {
             public MappingProfile()
             {
-                CreateMap<X.PagedList.PagedListMetaData, GoodCrud.Contract.Dtos.PagedListMetaData>();
-                CreateMap<GoodCrud.Contract.Dtos.PagedListMetaData, X.PagedList.PagedListMetaData>();
+                CreateMap<PagedListMetaData, PagedListOpenMetaData>();
+                CreateMap<PagedListOpenMetaData, PagedListMetaData>();
             }
         }
 

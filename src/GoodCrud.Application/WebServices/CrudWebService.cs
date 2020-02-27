@@ -51,10 +51,11 @@ namespace GoodCrud.Application.WebServices
 
             // var pagedList = new StaticPagedList<ShowT>(showList, pageNumber, PageSize, total);
 
-            var metaData = Mapper.Map<GoodCrud.Contract.Dtos.PagedListMetaData>(pagedList.GetMetaData());
+            var metaData = Mapper.Map<PagedListOpenMetaData>(pagedList.GetMetaData());
+            var list = pagedList.Select(e => EntityDto(e)).ToList();
             return new PagedListDto<ShowT>()
             {
-                List = pagedList.Select(e => EntityDto(e)).ToList(),
+                List = list,
                 MetaData = metaData,
             };
         }
