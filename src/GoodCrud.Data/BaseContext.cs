@@ -60,7 +60,7 @@ namespace GoodCrud.Data
             {
                 case "Microsoft.EntityFrameworkCore.Sqlite": return DatabaseProvider.Sqlite;
                 case "Microsoft.EntityFrameworkCore.InMemory": return DatabaseProvider.InMemory;
-                case "Microsoft.EntityFrameworkCore.MySql": return DatabaseProvider.MySql;
+                case "Pomelo.EntityFrameworkCore.MySql": return DatabaseProvider.MySql;
                 default: return DatabaseProvider.Unknown;
             }
         }
