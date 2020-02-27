@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using AutoMapper;
 using GoodCrud.Contract;
 using GoodCrud.Application;
+using Books.Domain.Validations;
 
 namespace GoodCrud.Web.Books
 {
@@ -42,6 +43,7 @@ namespace GoodCrud.Web.Books
             });
 
             services.AddScoped<BookWebService, BookWebService>();
+            services.AddValidations();
 
             var builder = services.AddControllersWithViews();
         }

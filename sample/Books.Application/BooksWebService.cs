@@ -3,13 +3,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Books.Domain;
+using FluentValidation;
 using GoodCrud.Application.WebServices;
 
 namespace Books.Application
 {
     public class BookWebService : CrudWebService<Book, IBooksUnitOfWork, BookDto, BookCreateUpdateDto, BookCreateUpdateDto, BookFilterDto>
     {
-        public BookWebService(IBooksUnitOfWork uow, IMapper mapper) : base(uow, mapper)
+        public BookWebService(IBooksUnitOfWork uow, IMapper mapper, IValidator<Book> validator) : base(uow, mapper, validator)
         {
             PageSize = 10;
         }

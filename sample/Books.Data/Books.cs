@@ -1,11 +1,12 @@
 using System;
 using Books.Domain;
+using GoodCrud.Contract.Interfaces;
 using GoodCrud.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Books.Data
 {
-    public class BookRepo : Repo<Book, Context>, IBookRepo
+    public class BookRepo : Repo<Book>, IBookRepo
     {
         public BookRepo(Context context) : base(context) { }
     }
@@ -29,17 +30,17 @@ namespace Books.Data
 
     }
 
-    public class BooksUnitOfWork : BaseUnitOfWork<Context>, IBooksUnitOfWork
+    public class BooksUnitOfWork : BaseUnitOfWork, IBooksUnitOfWork
     {
         public BooksUnitOfWork(Context context) : base(context)
         {
             BookRepo = new BookRepo(context);
         }
 
-        public override object GetRepo(Type type)
+        public override IRepo<E> GetRepo<E>() where E : class
         {
-            if (type == typeof(Book)) { return this.BookRepo; }
-            else { return base.GetRepo(type); }
+            if (typeof(E) == typeof(Book)) { return (IRepo<E>)this.BookRepo; }
+            else { return base.GetRepo<E>(); }
         }
 
         public IBookRepo BookRepo { get; set; }

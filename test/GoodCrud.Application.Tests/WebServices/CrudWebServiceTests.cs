@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using Books.Application;
 using Books.Domain;
 using GoodCrud.Data.Tests.Helpers;
+using FluentValidation;
+using Books.Domain.Validations;
 
 namespace GoodCrud.Application.Tests.WebServices
 {
 
     public class TestService : BookWebService
     {
-        public TestService(IBooksUnitOfWork uow, IMapper mapper) : base(uow, mapper)
+        public TestService(IBooksUnitOfWork uow, IMapper mapper, IValidator<Book> validator) : base(uow, mapper, validator)
         {
             PageSize = 2;
         }
@@ -23,7 +25,9 @@ namespace GoodCrud.Application.Tests.WebServices
 
     public class TestCallbackService : TestService
     {
-        public TestCallbackService(IBooksUnitOfWork uow, IMapper mapper) : base(uow, mapper) { }
+        public TestCallbackService(IBooksUnitOfWork uow, IMapper mapper, IValidator<Book> validator) : base(uow, mapper, validator)
+        {
+        }
 
         public override async Task<ResultDto<BookDto>> CreateCallbackAsync(BookCreateUpdateDto dto, Book entity)
         {
@@ -48,17 +52,18 @@ namespace GoodCrud.Application.Tests.WebServices
         {
             Utils.WithTestDatabase((uow) =>
             {
-                var mapper = AutoMapperConfig.RegisterMappings().CreateMapper();
+                var mapper = AutoMapperConfig.CreateMapper((cfg) => cfg.AddProfile(new MappingProfile()));
                 var config = new ConfigurationBuilder().Build();
+                var validator = new BookValidator();
 
                 TestService service;
                 if (type == "TestCallbackService")
                 {
-                    service = new TestCallbackService(uow, mapper);
+                    service = new TestCallbackService(uow, mapper, validator);
                 }
                 else
                 {
-                    service = new TestService(uow, mapper);
+                    service = new TestService(uow, mapper, validator);
                 }
                 service.Repo.DeleteAll();
                 func(service);
