@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.6.1" />
+
     <ProjectReference Include="..\GoodCrud.Contract\GoodCrud.Contract.csproj" />
   </ItemGroup>
 

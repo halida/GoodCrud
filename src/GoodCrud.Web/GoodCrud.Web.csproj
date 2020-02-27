@@ -7,7 +7,8 @@
   <ItemGroup>
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />
     <PackageReference Include="X.PagedList.Mvc.Bootstrap4" Version="7.9.0" />
-    
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
+
     <ProjectReference Include="..\GoodCrud.Application\GoodCrud.Application.csproj" />
     <ProjectReference Include="..\GoodCrud.Domain\GoodCrud.Domain.csproj" />
     <ProjectReference Include="..\GoodCrud.Contract\GoodCrud.Contract.csproj" />

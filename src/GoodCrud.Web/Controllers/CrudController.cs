@@ -4,6 +4,7 @@ using GoodCrud.Domain;
 using GoodCrud.Contract.Dtos;
 using GoodCrud.Application.WebServices;
 using GoodCrud.Contract.Interfaces;
+using FluentValidation.AspNetCore;
 
 namespace GoodCrud.Web.Controllers
 {
@@ -50,20 +51,10 @@ namespace GoodCrud.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateT dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Edit", dto);
-            }
-            var result = await _service.CreateAsync(dto);
+            var result = await _service.CreateAsync(dto, (vr) => vr.AddToModelState(ModelState, null));
             FlashMessage(result);
-            if (result.Status == ResultStatus.Succeed)
-            {
-                return RedirectToAction(nameof(Show), new { id = result.Data.Id });
-            }
-            else
-            {
-                return View("Edit", dto);
-            }
+            if (result.Status == ResultStatus.Failed) { return View("Edit", dto); }
+            return RedirectToAction(nameof(Show), new { id = result.Data.Id });
         }
 
         [HttpGet("{id}/Edit")]
@@ -77,17 +68,12 @@ namespace GoodCrud.Web.Controllers
         [HttpPost("{id}/Edit")]
         public async Task<IActionResult> Update(int id, UpdateT dto)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _service.UpdateAsync(id, dto);
-                if (result.Status == ResultStatus.NotFound) { return NotFound(); }
-                FlashMessage(result);
-                return RedirectToAction(nameof(Show), new { id });
-            }
-            else
-            {
-                return View(dto);
-            }
+
+            var result = await _service.UpdateAsync(id, dto, (vr) => vr.AddToModelState(ModelState, null));
+            if (result.Status == ResultStatus.NotFound) { return NotFound(); }
+            FlashMessage(result);
+            if (result.Status == ResultStatus.Failed) { return View("Edit", dto); }
+            return RedirectToAction(nameof(Show), new { id });
         }
 
         [HttpPost("{id}/Delete")]

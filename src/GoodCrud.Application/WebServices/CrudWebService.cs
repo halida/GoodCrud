@@ -1,12 +1,13 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
 using X.PagedList;
 using System.Collections.Generic;
 using GoodCrud.Contract.Interfaces;
 using GoodCrud.Contract.Dtos;
-using URF.Core.Abstractions;
+using FluentValidation;
+using FluentValidation.Results;
+using System;
 
 namespace GoodCrud.Application.WebServices
 {
@@ -18,14 +19,16 @@ namespace GoodCrud.Application.WebServices
     {
         public readonly IMapper Mapper;
         public readonly U Uow;
+        public readonly IValidator<E> Validator;
         public IRepo<E> Repo { get; set; }
 
         protected int PageSize = 50;
 
-        public CrudWebService(U uow, IMapper mapper)
+        public CrudWebService(U uow, IMapper mapper, IValidator<E> validator)
         {
             Uow = uow;
             Mapper = mapper;
+            Validator = validator;
             Repo = Uow.GetRepo<E>();
         }
 
@@ -68,11 +71,18 @@ namespace GoodCrud.Application.WebServices
             return ResultDto<ShowT>.Succeed(EntityDto(entity));
         }
 
-        public async Task<ResultDto<ShowT>> CreateAsync(CreateT dto)
+        public async Task<ResultDto<ShowT>> CreateAsync(CreateT dto, Action<ValidationResult> func = null)
         {
             var entity = Mapper.Map<E>(dto);
             var result = await CreateCallbackAsync(dto, entity);
             if (result != null) { return result; }
+
+            var validationResult = Validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                if (func != null) { func(validationResult); }
+                return ResultDto<ShowT>.Failed(validationResult.ToString());
+            }
 
             Repo.Insert(entity);
             await Uow.SaveChangesAsync();
@@ -94,7 +104,7 @@ namespace GoodCrud.Application.WebServices
             return await Task.FromResult<ResultDto<ShowT>>(null);
         }
 
-        public async Task<ResultDto<ShowT>> UpdateAsync(int id, UpdateT dto)
+        public async Task<ResultDto<ShowT>> UpdateAsync(int id, UpdateT dto, Action<ValidationResult> func = null)
         {
             var entity = await Repo.FindAsync(id);
             if (entity == null) { return ResultDto<ShowT>.NotFound(); }
@@ -102,6 +112,13 @@ namespace GoodCrud.Application.WebServices
             Mapper.Map(dto, entity);
             var result = await UpdateCallbackAsync(dto, entity);
             if (result != null) { return result; }
+
+            var validationResult = Validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                if (func != null) { func(validationResult); }
+                return ResultDto<ShowT>.Failed(validationResult.ToString());
+            }
 
             await Repo.UpdateAndSaveAsync(entity);
 
@@ -144,5 +161,6 @@ namespace GoodCrud.Application.WebServices
         {
             return Mapper.Map<UpdateT>(e);
         }
+
     }
 }

@@ -24,7 +24,8 @@ namespace GoodCrud.Contract.Dtos
 
         public static ResultDto<T> Failed(string description = "")
         {
-            return new ResultDto<T> { Status = ResultStatus.Failed, Description = description, Data = default };
+            return new ResultDto<T> { Status = ResultStatus.Failed, Description = description, Data = null };
         }
     }
+
 }
