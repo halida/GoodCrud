@@ -1,13 +1,11 @@
-using System;
 using System.Linq;
-using System.Reflection;
 using FluentValidation.Validators;
-using GoodCrud.Contract.Interfaces;
+using GoodCrud.Domain.Contract.Interfaces;
 using GoodCrud.Domain.Libraries;
 
 // https://www.damirscorner.com/blog/posts/20140519-EnsuringUniquePropertyValueUsingFluentValidation.html
 
-namespace GoodCrud.Domain.Validations
+namespace GoodCrud.Application.Validations
 {
     public class UniqueValidator<T> : PropertyValidator
       where T : class, IIdentifiable

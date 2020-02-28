@@ -8,7 +8,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.2" />
 
     <ProjectReference Include="..\..\src\GoodCrud.Domain\GoodCrud.Domain.csproj" />
-    <ProjectReference Include="..\Books.Domain.Contract\Books.Domain.Contract.csproj" />
   </ItemGroup>
 
 </Project>

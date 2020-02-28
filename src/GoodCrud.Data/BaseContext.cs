@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 using GoodCrud.Domain;
-using GoodCrud.Contract.Interfaces;
+using GoodCrud.Data.Contract.Interfaces;
 
 namespace GoodCrud.Data
 {

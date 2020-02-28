@@ -1,10 +1,10 @@
-using GoodCrud.Contract.Dtos;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList.Mvc.Core;
 using X.PagedList.Mvc.Bootstrap4.NetCore;
 using Microsoft.AspNetCore.Mvc.Routing;
 using AutoMapper;
+using GoodCrud.Application.Contract.Dtos;
 
 namespace GoodCrud.Web.Helpers
 {

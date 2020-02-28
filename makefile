@@ -1,9 +1,12 @@
 run:
 	cd sample/Books.Web/ && dotnet run
-build:
-	cd sample/Books.Web/ && dotnet build
 client:
 	cd sample/Books.Console/ && dotnet run
+
+build:
+	dotnet build GoodCrud.sln
+clean:
+	dotnet clean GoodCrud.sln
 
 # NAME=InitCreate make db_migrate
 db_migrate:
@@ -14,7 +17,7 @@ db_update:
 
 .PHONY: test
 test:
-	cd test/GoodCrud.Contract.Tests && dotnet test
+	cd test/GoodCrud.Domain.Tests && dotnet test
 	cd test/GoodCrud.Data.Tests && dotnet test
 	cd test/GoodCrud.Application.Tests && dotnet test
 	cd test/GoodCrud.Web.Tests && dotnet test

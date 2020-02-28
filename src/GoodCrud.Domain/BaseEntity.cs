@@ -1,5 +1,5 @@
 using System;
-using GoodCrud.Contract.Interfaces;
+using GoodCrud.Domain.Contract.Interfaces;
 
 namespace GoodCrud.Domain
 {

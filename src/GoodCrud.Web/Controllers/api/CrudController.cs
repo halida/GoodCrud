@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GoodCrud.Domain;
-using GoodCrud.Contract.Dtos;
 using GoodCrud.Application.WebServices;
-using GoodCrud.Contract.Interfaces;
+using GoodCrud.Data.Contract.Interfaces;
+using GoodCrud.Application.Contract.Dtos;
 
 namespace GoodCrud.Web.Api.Controllers
 {

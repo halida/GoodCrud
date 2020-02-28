@@ -1,4 +1,4 @@
-using GoodCrud.Contract.Dtos;
+using GoodCrud.Application.Contract.Dtos;
 
 namespace Books.Application
 {

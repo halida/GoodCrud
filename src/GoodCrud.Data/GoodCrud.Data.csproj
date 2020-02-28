@@ -4,9 +4,12 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.2" />
     <PackageReference Include="URF.Core.EF" Version="3.0.0" />
+
+    <ProjectReference Include="..\GoodCrud.Data.Contract\GoodCrud.Data.Contract.csproj" />
     <ProjectReference Include="..\GoodCrud.Domain\GoodCrud.Domain.csproj" />
   </ItemGroup>
 

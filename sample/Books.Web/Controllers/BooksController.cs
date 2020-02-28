@@ -1,4 +1,5 @@
 using Books.Application;
+using Books.Data.Contract;
 using Books.Domain;
 using GoodCrud.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;

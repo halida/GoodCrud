@@ -3,7 +3,7 @@ using Xunit;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
-using GoodCrud.Contract.Dtos;
+using GoodCrud.Application.Contract.Dtos;
 using AutoMapper;
 using System.Threading.Tasks;
 using Books.Application;
@@ -11,6 +11,7 @@ using Books.Domain;
 using GoodCrud.Data.Tests.Helpers;
 using FluentValidation;
 using Books.Domain.Validations;
+using Books.Data.Contract;
 
 namespace GoodCrud.Application.Tests.WebServices
 {

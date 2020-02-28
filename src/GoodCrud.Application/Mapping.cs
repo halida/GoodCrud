@@ -1,6 +1,6 @@
 using System;
 using AutoMapper;
-using GoodCrud.Contract.Dtos;
+using GoodCrud.Application.Contract.Dtos;
 using Microsoft.Extensions.DependencyInjection;
 using X.PagedList;
 

@@ -1,4 +1,3 @@
-using GoodCrud.Contract.Interfaces;
 using GoodCrud.Domain;
 
 namespace Books.Domain
@@ -7,14 +6,13 @@ namespace Books.Domain
     {
         public string Title { get; set; }
         public string Description { get; set; }
+
+        // public int AuthorId { get; set; }
+        // public virtual Author Author { get; set; }
     }
 
-    public interface IBooksUnitOfWork : IBaseUnitOfWork
+    public class Author : BaseEntity
     {
-        IBookRepo BookRepo { get; set; }
+        public string Name { get; set; }
     }
-    public interface IBookRepo : IRepo<Book>
-    {
-    }
-
 }

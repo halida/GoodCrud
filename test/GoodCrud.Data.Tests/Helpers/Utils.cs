@@ -1,5 +1,6 @@
 using System;
 using Books.Data;
+using Books.Data.Contract;
 using Books.Domain;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;

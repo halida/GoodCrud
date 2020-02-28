@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.2" />
 
     <ProjectReference Include="..\..\src\GoodCrud.Data\GoodCrud.Data.csproj" />
+    <ProjectReference Include="..\Books.Data.Contract\Books.Data.Contract.csproj" />
     <ProjectReference Include="..\Books.Domain\Books.Domain.csproj" />
 
   </ItemGroup>

@@ -3,11 +3,12 @@ using AutoMapper;
 using System.Linq;
 using X.PagedList;
 using System.Collections.Generic;
-using GoodCrud.Contract.Interfaces;
-using GoodCrud.Contract.Dtos;
 using FluentValidation;
 using FluentValidation.Results;
 using System;
+using GoodCrud.Domain.Contract.Interfaces;
+using GoodCrud.Data.Contract.Interfaces;
+using GoodCrud.Application.Contract.Dtos;
 
 namespace GoodCrud.Application.WebServices
 {

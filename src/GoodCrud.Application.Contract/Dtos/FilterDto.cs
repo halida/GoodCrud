@@ -1,4 +1,4 @@
-namespace GoodCrud.Contract.Dtos
+namespace GoodCrud.Application.Contract.Dtos
 {
     public class FilterDto
     {

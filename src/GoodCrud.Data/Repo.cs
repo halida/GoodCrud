@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using GoodCrud.Contract.Interfaces;
+using GoodCrud.Data.Contract.Interfaces;
+using GoodCrud.Domain.Contract.Interfaces;
 using URF.Core.EF;
 
 namespace GoodCrud.Data

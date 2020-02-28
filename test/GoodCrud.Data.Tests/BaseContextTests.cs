@@ -14,10 +14,10 @@ namespace GoodCrud.Data.Tests
         {
             Utils.WithTestDatabase(async (uow) =>
             {
-                uow.BookRepo.DeleteAll();
+                uow.GetRepo<Book>().DeleteAll();
                 // assign CreatedAt and UpdatedAt
                 var book = new Book() { Title = "b1" };
-                uow.BookRepo.Insert(book);
+                uow.GetRepo<Book>().Insert(book);
                 await uow.SaveChangesAsync();
 
                 var today = DateTime.UtcNow.Date;
@@ -31,7 +31,7 @@ namespace GoodCrud.Data.Tests
 
                 // has CreatedAt will use it
                 var bookN = new Book() { Title = "b2", CreatedAt = today };
-                uow.BookRepo.Insert(bookN);
+                uow.GetRepo<Book>().Insert(bookN);
                 await uow.SaveChangesAsync();
                 Assert.Equal(today, bookN.CreatedAt);
 
@@ -39,7 +39,7 @@ namespace GoodCrud.Data.Tests
                 var old = book.UpdatedAt;
                 book.Title = "b1u";
                 Thread.Sleep(1);
-                uow.BookRepo.Update(book);
+                uow.GetRepo<Book>().Update(book);
                 await uow.SaveChangesAsync();
                 Assert.NotEqual(old, book.UpdatedAt);
 
@@ -47,7 +47,7 @@ namespace GoodCrud.Data.Tests
                 var old2 = book.UpdatedAt;
                 book.Title = "b1u2";
                 Thread.Sleep(1);
-                uow.BookRepo.Update(book);
+                uow.GetRepo<Book>().Update(book);
                 await uow.SaveChangesAsync();
                 Assert.NotEqual(old2, book.UpdatedAt);
             });

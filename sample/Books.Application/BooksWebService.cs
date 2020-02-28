@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Books.Data.Contract;
 using Books.Domain;
 using FluentValidation;
 using GoodCrud.Application.WebServices;

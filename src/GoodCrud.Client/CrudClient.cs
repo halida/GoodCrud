@@ -1,12 +1,12 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
-using System.Collections;
-using System.Collections.Specialized;
-using System;
 using Newtonsoft.Json;
-using System.Threading.Tasks;
-using GoodCrud.Contract.Dtos;
+using GoodCrud.Application.Contract.Dtos;
 
 namespace GoodCrud.Client
 {

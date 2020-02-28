@@ -1,4 +1,4 @@
-﻿namespace GoodCrud.Contract.Interfaces
+namespace GoodCrud.Domain.Contract.Interfaces
 {
     public interface IIdentifiable
     {

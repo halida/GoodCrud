@@ -1,6 +1,6 @@
 
+using Books.Domain;
 using FluentValidation;
-using GoodCrud.Domain.Validations;
 using Microsoft.Extensions.DependencyInjection;
 
 

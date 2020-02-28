@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
+using GoodCrud.Domain.Contract.Interfaces;
 using URF.Core.Abstractions;
 
-namespace GoodCrud.Contract.Interfaces
+namespace GoodCrud.Data.Contract.Interfaces
 {
     public interface IRepo<E> : IRepository<E>
     where E : class, IIdentifiable

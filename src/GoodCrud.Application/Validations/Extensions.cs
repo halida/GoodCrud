@@ -1,9 +1,9 @@
 
 using System.Linq;
 using FluentValidation;
-using GoodCrud.Contract.Interfaces;
+using GoodCrud.Domain.Contract.Interfaces;
 
-namespace GoodCrud.Domain.Validations
+namespace GoodCrud.Application.Validations
 {
     public static class Extensions
     {

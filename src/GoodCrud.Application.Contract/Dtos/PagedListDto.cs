@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GoodCrud.Contract.Dtos
+namespace GoodCrud.Application.Contract.Dtos
 {
     public class PagedListDto<T>
     {

@@ -1,6 +1,7 @@
-﻿using URF.Core.Abstractions;
+﻿using GoodCrud.Domain.Contract.Interfaces;
+using URF.Core.Abstractions;
 
-namespace GoodCrud.Contract.Interfaces
+namespace GoodCrud.Data.Contract.Interfaces
 {
     public interface IBaseUnitOfWork : IUnitOfWork
     {
