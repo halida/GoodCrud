@@ -9,7 +9,7 @@ namespace GoodCrud.Domain.Libraries
             var result = new List<string>();
             if (raw == null) { return result; }
 
-            foreach (var s in raw.Split(","))
+            foreach (var s in raw.Split(','))
             {
                 if (string.IsNullOrWhiteSpace(s)) { continue; }
                 result.Add(s.Trim());

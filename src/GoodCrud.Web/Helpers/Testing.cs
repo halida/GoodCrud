@@ -24,8 +24,8 @@ namespace GoodCrud.Web.Helpers
 
         public static KeyValuePair<string, string> ExtractCookie(HttpResponseMessage response)
         {
-            var cookieContent = response.Headers.FirstOrDefault(x => x.Key == "Set-Cookie").Value.First().Split(" ")[0];
-            var tokenCookie = cookieContent.Split("=");
+            var cookieContent = response.Headers.FirstOrDefault(x => x.Key == "Set-Cookie").Value.First().Split(' ')[0];
+            var tokenCookie = cookieContent.Split('=');
             var name = tokenCookie[0];
             var value = tokenCookie[1];
             return new KeyValuePair<string, string>(name, value);
