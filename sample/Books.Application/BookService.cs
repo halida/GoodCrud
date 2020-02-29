@@ -5,13 +5,13 @@ using AutoMapper;
 using Books.Data.Contract;
 using Books.Domain;
 using FluentValidation;
-using GoodCrud.Application.WebServices;
+using GoodCrud.Application.Services;
 
 namespace Books.Application
 {
-    public class BookWebService : CrudWebService<Book, IBooksUnitOfWork, BookDto, BookCreateUpdateDto, BookCreateUpdateDto, BookFilterDto>
+    public class BookService : EntityService<Book, BookDto, BookCreateUpdateDto, BookCreateUpdateDto, BookFilterDto>
     {
-        public BookWebService(IBooksUnitOfWork uow, IMapper mapper, IValidator<Book> validator) : base(uow, mapper, validator)
+        public BookService(IBooksUnitOfWork uow, IMapper mapper, IValidator<Book> validator) : base(uow, mapper, validator)
         {
             PageSize = 10;
         }

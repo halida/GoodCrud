@@ -10,22 +10,21 @@ using GoodCrud.Domain.Contract.Interfaces;
 using GoodCrud.Data.Contract.Interfaces;
 using GoodCrud.Application.Contract.Dtos;
 
-namespace GoodCrud.Application.WebServices
+namespace GoodCrud.Application.Services
 {
-    public abstract class CrudWebService<E, U, ShowT, CreateT, UpdateT, FilterT>
+    public abstract class EntityService<E, ShowT, CreateT, UpdateT, FilterT>
     where E : class, IIdentifiable
-    where U : IBaseUnitOfWork
     where ShowT : class
     where FilterT : FilterDto
     {
         public readonly IMapper Mapper;
-        public readonly U Uow;
+        public readonly IBaseUnitOfWork Uow;
         public readonly IValidator<E> Validator;
         public IRepo<E> Repo { get; set; }
 
         protected int PageSize = 50;
 
-        public CrudWebService(U uow, IMapper mapper, IValidator<E> validator)
+        public EntityService(IBaseUnitOfWork uow, IMapper mapper, IValidator<E> validator)
         {
             Uow = uow;
             Mapper = mapper;

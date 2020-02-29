@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GoodCrud.Domain;
-using GoodCrud.Application.WebServices;
+using GoodCrud.Application.Services;
 using FluentValidation.AspNetCore;
 using GoodCrud.Data.Contract.Interfaces;
 using GoodCrud.Application.Contract.Dtos;
@@ -9,10 +9,9 @@ using GoodCrud.Application.Contract.Dtos;
 namespace GoodCrud.Web.Controllers
 {
     [Route("[controller]")]
-    public abstract class CrudController<Service, E, U, T, CreateT, UpdateT, FilterT> : Controller
-    where Service : CrudWebService<E, U, T, CreateT, UpdateT, FilterT>
+    public abstract class CrudController<Service, E, T, CreateT, UpdateT, FilterT> : Controller
+    where Service : EntityService<E, T, CreateT, UpdateT, FilterT>
     where E : BaseEntity
-    where U : IBaseUnitOfWork
     where T : EntityDto
     where CreateT : class
     where UpdateT : class

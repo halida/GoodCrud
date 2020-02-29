@@ -33,7 +33,7 @@ namespace GoodCrud.Web.Books
                 cfg.AddProfile(new MappingProfile());
             });
 
-            services.AddScoped<BookWebService, BookWebService>();
+            services.AddScoped<BookService, BookService>();
             services.AddValidations();
 
             var builder = services.AddControllersWithViews();

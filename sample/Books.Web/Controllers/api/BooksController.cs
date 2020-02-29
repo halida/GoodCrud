@@ -8,8 +8,8 @@ namespace GoodCrud.Web.Books.Api
 {
     [Area("api")]
     [Route("api/[controller]")]
-    public class BooksController : CrudController<BookWebService, Book, IBooksUnitOfWork, BookDto, BookCreateUpdateDto, BookCreateUpdateDto, BookFilterDto>
+    public class BooksController : CrudController<BookService, Book, BookDto, BookCreateUpdateDto, BookCreateUpdateDto, BookFilterDto>
     {
-        public BooksController(BookWebService service) : base(service) { }
+        public BooksController(BookService service) : base(service) { }
     }
 }

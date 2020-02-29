@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GoodCrud.Domain;
-using GoodCrud.Application.WebServices;
+using GoodCrud.Application.Services;
 using GoodCrud.Data.Contract.Interfaces;
 using GoodCrud.Application.Contract.Dtos;
 
 namespace GoodCrud.Web.Api.Controllers
 {
     [ApiController]
-    public abstract class CrudController<Service, E, U, T, CreateT, UpdateT, FilterT> : ControllerBase
-    where Service : CrudWebService<E, U, T, CreateT, UpdateT, FilterT>
+    public abstract class CrudController<Service, E, T, CreateT, UpdateT, FilterT> : ControllerBase
+    where Service : EntityService<E, T, CreateT, UpdateT, FilterT>
     where E : BaseEntity
-    where U : IBaseUnitOfWork
     where T : EntityDto
     where CreateT : class
     where UpdateT : class

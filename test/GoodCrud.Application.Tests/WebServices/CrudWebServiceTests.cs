@@ -16,7 +16,7 @@ using Books.Data.Contract;
 namespace GoodCrud.Application.Tests.WebServices
 {
 
-    public class TestService : BookWebService
+    public class TestService : BookService
     {
         public TestService(IBooksUnitOfWork uow, IMapper mapper, IValidator<Book> validator) : base(uow, mapper, validator)
         {
@@ -49,7 +49,7 @@ namespace GoodCrud.Application.Tests.WebServices
 
     public class CrudWebServiceTests
     {
-        protected static void WithService(Action<BookWebService> func, string type = null)
+        protected static void WithService(Action<BookService> func, string type = null)
         {
             Utils.WithTestDatabase((uow) =>
             {
