@@ -52,7 +52,7 @@ namespace GoodCrud.Application.Services
             // var pagedList = new StaticPagedList<ShowT>(showList, pageNumber, PageSize, total);
 
             var metaData = Mapper.Map<PagedListOpenMetaData>(pagedList.GetMetaData());
-            var list = pagedList.Select(e => EntityDto(e)).ToList();
+            var list = pagedList.Select(e => EntityDto(e, filter.Format)).ToList();
             return new PagedListDto<ShowT>()
             {
                 List = list,
@@ -153,9 +153,16 @@ namespace GoodCrud.Application.Services
             return await Repo.ExistsAsync(id);
         }
 
-        public ShowT EntityDto(E e)
+        public virtual ShowT EntityDto(E e, string format = null)
         {
-            return Mapper.Map<ShowT>(e);
+            if (format == null)
+            {
+                return Mapper.Map<ShowT>(e);
+            }
+            else
+            {
+                return Mapper.Map<ShowT>(e, (o) => o.Items["format"] = format);
+            }
         }
 
         public UpdateT UpdateDto(E e)
