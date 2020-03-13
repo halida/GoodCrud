@@ -2,6 +2,9 @@
 using GoodCrud.Domain.Contract.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using URF.Core.EF;
 
 namespace GoodCrud.Data
@@ -34,6 +37,33 @@ namespace GoodCrud.Data
             return GetRepo<E>();
         }
 
+        public TProperty GetReference<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> property)
+        where TEntity : class, IIdentifiable where TProperty : class
+        {
+            var getProperty = property.Compile();
+            var value = getProperty(entity);
+            if (value != null) { return value; }
+
+            Context.Entry(entity).Reference(property).Load();
+            return getProperty(entity);
+        }
+
+        public async Task<TProperty> GetReferenceAsync<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> property)
+        where TEntity : class, IIdentifiable where TProperty : class
+        {
+            var getProperty = property.Compile();
+            var value = getProperty(entity);
+            if (value != null) { return value; }
+
+            await Context.Entry(entity).Reference(property).LoadAsync();
+            return getProperty(entity);
+        }
+
+        public IQueryable<TProperty> GetCollectionQuery<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> property)
+        where TEntity : class, IIdentifiable where TProperty : class
+        {
+            return Context.Entry(entity).Collection(property).Query();
+        }
 
     }
 }
