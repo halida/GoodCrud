@@ -18,4 +18,17 @@ namespace Books.Application
         public string Description { get; set; }
     }
 
+    public class AuthorDto : EntityDto
+    {
+        public string Name { get; set; }
+    }
+    public class AuthorCreateUpdateDto
+    {
+        public string Name { get; set; }
+    }
+    public class AuthorFilterDto : FilterDto
+    {
+        public string Name { get; set; }
+    }
+
 }
