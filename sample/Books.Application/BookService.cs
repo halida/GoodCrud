@@ -19,8 +19,8 @@ namespace Books.Application
         public override async Task<IQueryable<Book>> ListFilterAsync(BookFilterDto filter)
         {
             var query = Repo.Queryable();
-            if (!String.IsNullOrEmpty(filter.Title)) { query = query.Where(e => e.Title.Contains(filter.Title)); }
-            if (!String.IsNullOrEmpty(filter.Description)) { query = query.Where(e => e.Description.Contains(filter.Description)); }
+            if (!String.IsNullOrEmpty(filter.Title)) { query = query.Where(e => e.Title!.Contains(filter.Title)); }
+            if (!String.IsNullOrEmpty(filter.Description)) { query = query.Where(e => e.Description!.Contains(filter.Description)); }
             query = query.OrderByDescending(e => e.Id);
             return await Task.FromResult<IQueryable<Book>>(query);
         }
