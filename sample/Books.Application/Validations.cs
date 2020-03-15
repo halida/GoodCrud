@@ -22,4 +22,11 @@ namespace Books.Domain.Validations
         }
     }
 
+    public class AuthorValidator : AbstractValidator<Author>
+    {
+        public AuthorValidator()
+        {
+            RuleFor(e => e.Name).NotNull();
+        }
+    }
 }

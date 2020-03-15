@@ -15,7 +15,6 @@ using Books.Data.Contract;
 
 namespace GoodCrud.Application.Tests.WebServices
 {
-
     public class TestService : BookService
     {
         public TestService(IBooksUnitOfWork uow, IMapper mapper, IValidator<Book> validator) : base(uow, mapper, validator)
@@ -58,14 +57,11 @@ namespace GoodCrud.Application.Tests.WebServices
                 var validator = new BookValidator();
 
                 TestService service;
-                if (type == "TestCallbackService")
+                service = type switch
                 {
-                    service = new TestCallbackService(uow, mapper, validator);
-                }
-                else
-                {
-                    service = new TestService(uow, mapper, validator);
-                }
+                    "TestCallbackService" => new TestCallbackService(uow, mapper, validator),
+                    _ => new TestService(uow, mapper, validator),
+                };
                 service.Repo.DeleteAll();
                 func(service);
             });
@@ -297,6 +293,36 @@ namespace GoodCrud.Application.Tests.WebServices
                 var book = new Book() { Title = "ccc" };
                 var dto = service.UpdateDto(book);
                 Assert.True(dto.Title == "ccc");
+            });
+        }
+
+        [Fact]
+        public void Test_AuthorService()
+        {
+            Utils.WithTestDatabase(async (uow) =>
+            {
+                var mapper = AutoMapperConfig.CreateMapper((cfg) => cfg.AddProfile(new MappingProfile()));
+                var config = new ConfigurationBuilder().Build();
+
+                var service = new AuthorService(uow, mapper, new AuthorValidator());
+                var authorRepo = uow.GetRepo<Author>();
+                authorRepo.DeleteAll();
+                var bookRepo = uow.GetRepo<Book>();
+                bookRepo.DeleteAll();
+
+                var a1 = new Author() { Name = "a1" };
+                var a2 = new Author() { Name = "a2" };
+                foreach (var e in new Author[] { a1, a2 }) { await authorRepo.InsertAndSaveAsync(e); }
+
+                var b11 = new Book() { Title = "china 1", AuthorId = a1.Id };
+                var b12 = new Book() { Title = "us 1", AuthorId = a1.Id };
+                var b21 = new Book() { Title = "us 2", AuthorId = a2.Id };
+                var b22 = new Book() { Title = "us 3", AuthorId = a2.Id };
+                foreach (var e in new Book[] { b11, b12, b21, b22 }) { await bookRepo.InsertAndSaveAsync(e); }
+
+                var books = await service.RelatedBooks("china", "us");
+                Assert.Single(books);
+                Assert.Equal(b12.Id, books[0].Id);
             });
         }
 

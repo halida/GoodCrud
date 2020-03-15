@@ -20,15 +20,15 @@ namespace Books.Application
 
     public class AuthorDto : EntityDto
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
     public class AuthorCreateUpdateDto
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
     public class AuthorFilterDto : FilterDto
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
 }

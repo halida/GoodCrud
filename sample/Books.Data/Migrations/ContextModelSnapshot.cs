@@ -42,7 +42,7 @@ namespace Books.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -70,10 +70,8 @@ namespace Books.Data.Migrations
             modelBuilder.Entity("Books.Domain.Book", b =>
                 {
                     b.HasOne("Books.Domain.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId");
                 });
 #pragma warning restore 612, 618
         }

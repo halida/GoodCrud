@@ -8,7 +8,10 @@ namespace Books.Data
 
     public class Context : BaseContext
     {
-        public Context(DbContextOptions<Context> options) : base(options) { }
+        public Context(DbContextOptions<Context> options) : base(options)
+        {
+            this.ChangeTracker.LazyLoadingEnabled = false;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

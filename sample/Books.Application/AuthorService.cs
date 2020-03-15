@@ -21,7 +21,7 @@ namespace Books.Application
         public override async Task<IQueryable<Author>> ListFilterAsync(AuthorFilterDto filter)
         {
             var query = Repo.Queryable().Include(x => x.Books).AsQueryable();
-            if (!String.IsNullOrEmpty(filter.Name)) { query = query.Where(e => e.Name.Contains(filter.Name)); }
+            if (!String.IsNullOrEmpty(filter.Name)) { query = query.Where(e => e.Name!.Contains(filter.Name)); }
             query = query.OrderByDescending(e => e.Id);
             return await Task.FromResult<IQueryable<Author>>(query);
         }
@@ -32,15 +32,14 @@ namespace Books.Application
 
             // demo only, not effecient
             var query = this.Uow.GetRepo<Book>().Queryable()
-                .Where(e => e.Title.Contains(kindFrom));
+                .Where(e => e.Title!.Contains(kindFrom));
             foreach (var book in await query.ToListAsync())
             {
                 var author = await Uow.GetReferenceAsync(book, e => e.Author);
                 var authorBooksQuery = Uow.GetCollectionQuery(author, e => e.Books)
-                    .Where(e => e.Title.Contains(kindTo));
+                    .Where(e => e.Title!.Contains(kindTo));
                 foreach (var authorBook in await authorBooksQuery.ToListAsync())
                 {
-                    if (authorBook.Id == authorBook.Id) { continue; }
                     results.Add(authorBook);
                 }
             }

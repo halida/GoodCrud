@@ -8,7 +8,7 @@ namespace Books.Domain
         public string? Title { get; set; }
         public string? Description { get; set; }
 
-        public int AuthorId { get; set; }
+        public int? AuthorId { get; set; }
         public virtual Author? Author { get; set; }
     }
 
@@ -16,6 +16,6 @@ namespace Books.Domain
     {
         public string? Name { get; set; }
 
-        public virtual List<Book> Books { get; set; }
+        public virtual List<Book>? Books { get; set; }
     }
 }
