@@ -10,7 +10,7 @@ namespace GoodCrud.Web.Controllers
 {
     [Route("[controller]")]
     public abstract class CrudController<Service, E, T, CreateT, UpdateT, FilterT> : Controller
-    where Service : EntityService<E, T, CreateT, UpdateT, FilterT>
+    where Service : CrudService<E, T, CreateT, UpdateT, FilterT>
     where E : BaseEntity
     where T : EntityDto
     where CreateT : class

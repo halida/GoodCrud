@@ -12,6 +12,7 @@ using GoodCrud.Data.Tests.Helpers;
 using FluentValidation;
 using Books.Domain.Validations;
 using Books.Data.Contract;
+using Books.Application.Services.Crud;
 
 namespace GoodCrud.Application.Tests.WebServices
 {

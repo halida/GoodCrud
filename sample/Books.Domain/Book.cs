@@ -11,11 +11,4 @@ namespace Books.Domain
         public int? AuthorId { get; set; }
         public virtual Author? Author { get; set; }
     }
-
-    public class Author : BaseEntity
-    {
-        public string? Name { get; set; }
-
-        public virtual List<Book>? Books { get; set; }
-    }
 }

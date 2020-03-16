@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using GoodCrud.Application;
 using Books.Domain.Validations;
 using Books.Data.Contract;
+using Books.Application.Services.Crud;
 
 namespace GoodCrud.Web.Books
 {

@@ -12,7 +12,7 @@ using GoodCrud.Application.Contract.Dtos;
 
 namespace GoodCrud.Application.Services
 {
-    public abstract class EntityService<E, ShowT, CreateT, UpdateT, FilterT>
+    public abstract class CrudService<E, ShowT, CreateT, UpdateT, FilterT>
     where E : class, IIdentifiable
     where ShowT : class
     where FilterT : FilterDto
@@ -24,7 +24,7 @@ namespace GoodCrud.Application.Services
 
         protected int PageSize = 50;
 
-        public EntityService(IBaseUnitOfWork uow, IMapper mapper, IValidator<E> validator)
+        public CrudService(IBaseUnitOfWork uow, IMapper mapper, IValidator<E> validator)
         {
             Uow = uow;
             Mapper = mapper;
