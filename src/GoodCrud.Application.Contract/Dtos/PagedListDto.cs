@@ -4,6 +4,12 @@ namespace GoodCrud.Application.Contract.Dtos
 {
     public class PagedListDto<T>
     {
+        public PagedListDto(List<T> list, PagedListOpenMetaData metaData)
+        {
+            List = list;
+            MetaData = metaData;
+        }
+
         public List<T> List { get; set; }
         public PagedListOpenMetaData MetaData { get; set; }
     }

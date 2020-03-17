@@ -53,7 +53,7 @@ namespace GoodCrud.Web.Controllers
             var result = await _service.CreateAsync(dto, (vr) => vr.AddToModelState(ModelState, null));
             FlashMessage(result);
             if (result.Status == ResultStatus.Failed) { return View("Edit", dto); }
-            return RedirectToAction(nameof(Show), new { id = result.Data.Id });
+            return RedirectToAction(nameof(Show), new { id = result.Data!.Id });
         }
 
         [HttpGet("{id}/Edit")]

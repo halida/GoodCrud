@@ -20,9 +20,9 @@ namespace GoodCrud.Client
         public string Prefix;
         public string Controller;
 
-        public string Username;
-        public string Password;
-        public CrudClient(string website, string prefix, string controller, string username = null, string password = null)
+        public string? Username;
+        public string? Password;
+        public CrudClient(string website, string prefix, string controller, string? username = null, string? password = null)
         {
             Website = website;
             Prefix = prefix;
@@ -35,9 +35,9 @@ namespace GoodCrud.Client
             // options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
         }
 
-        public virtual async Task<PagedListDto<T>> GetsAsync(FilterT filter = null)
+        public virtual async Task<PagedListDto<T>> GetsAsync(FilterT? filter = null)
         {
-            var options = QueryOptions(filter);
+            var options = (filter == null) ? null : QueryOptions(filter);
             return await RequestResult<PagedListDto<T>>(
                 $"{Prefix}/{Controller}", Method.GET, options);
         }
@@ -72,7 +72,7 @@ namespace GoodCrud.Client
                 $"{Prefix}/{Controller}/{id}", Method.DELETE);
         }
 
-        public virtual async Task<string> Request(string url, Method method, StringDictionary options = null, dynamic data = null)
+        public virtual async Task<string> Request(string url, Method method, StringDictionary? options = null, dynamic? data = null)
         {
             var client = new RestClient(Website)
             {
@@ -97,8 +97,6 @@ namespace GoodCrud.Client
 
         protected StringDictionary QueryOptions<C>(C c) where C : class
         {
-            if (c == null) { return null; }
-
             var options = new StringDictionary();
             foreach (var property in typeof(C).GetProperties())
             {
@@ -107,7 +105,7 @@ namespace GoodCrud.Client
             return options;
         }
 
-        public virtual async Task<CT> RequestResult<CT>(string url, Method method, StringDictionary options = null, dynamic data = null)
+        public virtual async Task<CT> RequestResult<CT>(string url, Method method, StringDictionary? options = null, dynamic? data = null)
         {
             var content = await Request(url, method, options, data);
             var result = JsonConvert.DeserializeObject<CT>(content);

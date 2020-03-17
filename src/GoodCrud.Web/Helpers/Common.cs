@@ -22,16 +22,10 @@ namespace GoodCrud.Web.Helpers
             return request.Path + qb.ToQueryString();
         }
 
-        public static string IgnoreException(Func<string> func)
+        public static T? IgnoreException<T>(Func<T> func) where T : class
         {
-            try
-            {
-                return func();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            try { return func(); }
+            catch (Exception) { return null; }
         }
 
     }

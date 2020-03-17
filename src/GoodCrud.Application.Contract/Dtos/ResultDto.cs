@@ -10,8 +10,8 @@ namespace GoodCrud.Application.Contract.Dtos
     where T : class
     {
         public ResultStatus Status { get; set; }
-        public string Description { get; set; }
-        public T Data { get; set; }
+        public string? Description { get; set; }
+        public T? Data { get; set; }
 
         public static ResultDto<T> Succeed(T obj, string description = "")
         {

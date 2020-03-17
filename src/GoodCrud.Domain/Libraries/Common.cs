@@ -4,7 +4,7 @@ namespace GoodCrud.Domain.Libraries
 {
     public class Common
     {
-        public static List<string> GetStringList(string raw, bool sort = true)
+        public static List<string> GetStringList(string? raw, bool sort = true)
         {
             var result = new List<string>();
             if (raw == null) { return result; }

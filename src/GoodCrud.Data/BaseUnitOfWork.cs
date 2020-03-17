@@ -37,7 +37,7 @@ namespace GoodCrud.Data
             return GetRepo<E>();
         }
 
-        public TProperty GetReference<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> property)
+        public TProperty? GetReference<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty?>> property)
         where TEntity : class, IIdentifiable where TProperty : class
         {
             var getProperty = property.Compile();
@@ -48,7 +48,7 @@ namespace GoodCrud.Data
             return getProperty(entity);
         }
 
-        public async Task<TProperty> GetReferenceAsync<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> property)
+        public async Task<TProperty?> GetReferenceAsync<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty?>> property)
         where TEntity : class, IIdentifiable where TProperty : class
         {
             var getProperty = property.Compile();
@@ -59,7 +59,7 @@ namespace GoodCrud.Data
             return getProperty(entity);
         }
 
-        public IQueryable<TProperty> GetCollectionQuery<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> property)
+        public IQueryable<TProperty> GetCollectionQuery<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>?>> property)
         where TEntity : class, IIdentifiable where TProperty : class
         {
             return Context.Entry(entity).Collection(property).Query();

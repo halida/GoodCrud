@@ -53,11 +53,7 @@ namespace GoodCrud.Application.Services
 
             var metaData = Mapper.Map<PagedListOpenMetaData>(pagedList.GetMetaData());
             var list = pagedList.Select(e => EntityDto(e, filter.Format)).ToList();
-            return new PagedListDto<ShowT>()
-            {
-                List = list,
-                MetaData = metaData,
-            };
+            return new PagedListDto<ShowT>(list, metaData);
         }
 
         public virtual async Task<IQueryable<E>> ListFilterAsync(FilterT filter)
@@ -72,7 +68,7 @@ namespace GoodCrud.Application.Services
             return ResultDto<ShowT>.Succeed(EntityDto(entity));
         }
 
-        public async Task<ResultDto<ShowT>> CreateAsync(CreateT dto, Action<ValidationResult> func = null)
+        public async Task<ResultDto<ShowT>> CreateAsync(CreateT dto, Action<ValidationResult>? func = null)
         {
             var entity = Mapper.Map<E>(dto);
             var result = await CreateCallbackAsync(dto, entity);
@@ -100,12 +96,12 @@ namespace GoodCrud.Application.Services
             }
             return outList;
         }
-        public virtual async Task<ResultDto<ShowT>> CreateCallbackAsync(CreateT dto, E entity)
+        public virtual async Task<ResultDto<ShowT>?> CreateCallbackAsync(CreateT dto, E entity)
         {
-            return await Task.FromResult<ResultDto<ShowT>>(null);
+            return await Task.FromResult<ResultDto<ShowT>?>(null);
         }
 
-        public async Task<ResultDto<ShowT>> UpdateAsync(int id, UpdateT dto, Action<ValidationResult> func = null)
+        public async Task<ResultDto<ShowT>> UpdateAsync(int id, UpdateT dto, Action<ValidationResult>? func = null)
         {
             var entity = await Repo.FindAsync(id);
             if (entity == null) { return ResultDto<ShowT>.NotFound(); }
@@ -126,9 +122,9 @@ namespace GoodCrud.Application.Services
             return ResultDto<ShowT>.Succeed(EntityDto(entity), $"{typeof(E).Name} #{entity.Id} updated.");
         }
 
-        public virtual async Task<ResultDto<ShowT>> UpdateCallbackAsync(UpdateT dto, E entity)
+        public virtual async Task<ResultDto<ShowT>?> UpdateCallbackAsync(UpdateT dto, E entity)
         {
-            return await Task.FromResult<ResultDto<ShowT>>(null);
+            return await Task.FromResult<ResultDto<ShowT>?>(null);
         }
 
         public async Task<ResultDto<ShowT>> DeleteAsync(int id)
@@ -143,9 +139,9 @@ namespace GoodCrud.Application.Services
             return ResultDto<ShowT>.Succeed(EntityDto(entity), $"{typeof(E).Name} #{entity.Id} deleted.");
         }
 
-        public virtual async Task<ResultDto<ShowT>> DeleteCallbackAsync(E entity)
+        public virtual async Task<ResultDto<ShowT>?> DeleteCallbackAsync(E entity)
         {
-            return await Task.FromResult<ResultDto<ShowT>>(null);
+            return await Task.FromResult<ResultDto<ShowT>?>(null);
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -153,7 +149,7 @@ namespace GoodCrud.Application.Services
             return await Repo.ExistsAsync(id);
         }
 
-        public virtual ShowT EntityDto(E e, string format = null)
+        public virtual ShowT EntityDto(E e, string? format = null)
         {
             if (format == null)
             {

@@ -13,13 +13,13 @@ namespace GoodCrud.Data.Contract.Interfaces
         IRepo<E> GetRepo<E>() where E : class, IIdentifiable;
         IRepo<E> GetRepo<E>(E ignored) where E : class, IIdentifiable;
 
-        TPorperty GetReference<TEntity, TPorperty>(TEntity entity, Expression<Func<TEntity, TPorperty>> property)
+        TPorperty? GetReference<TEntity, TPorperty>(TEntity entity, Expression<Func<TEntity, TPorperty?>> property)
         where TEntity : class, IIdentifiable where TPorperty : class;
 
-        Task<TPorperty> GetReferenceAsync<TEntity, TPorperty>(TEntity entity, Expression<Func<TEntity, TPorperty>> property)
+        Task<TPorperty?> GetReferenceAsync<TEntity, TPorperty>(TEntity entity, Expression<Func<TEntity, TPorperty?>> property)
         where TEntity : class, IIdentifiable where TPorperty : class;
 
-        IQueryable<TProperty> GetCollectionQuery<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> property)
+        IQueryable<TProperty> GetCollectionQuery<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>?>> property)
         where TEntity : class, IIdentifiable where TProperty : class;
     }
 }

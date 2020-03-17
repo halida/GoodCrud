@@ -22,12 +22,12 @@ namespace GoodCrud.Application.Validations
 
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            var editedItem = context.Instance as T;
-            var newValue = context.PropertyValue as string;
+            string? newValue = context.PropertyValue as string;
             if (AllowNull && newValue == null) { return true; }
 
-            var matched = Query.CreatePredicate<T>(context.PropertyName, newValue);
+            var matched = Query.CreatePredicate<T>(context.PropertyName, newValue!);
             var found = _items.Where(matched).FirstOrDefault();
+            var editedItem = (context.Instance as T)!;
             return (found == null || found.Id == editedItem.Id);
         }
     }

@@ -20,6 +20,8 @@ namespace Books.Application.Services.Domain
             foreach (var book in await query.ToListAsync())
             {
                 var author = await uow.GetReferenceAsync(book, e => e.Author);
+                if (author == null) { continue; }
+
                 var authorBooksQuery = uow.GetCollectionQuery(author, e => e.Books)
                     .Where(e => e.Title!.Contains(kindTo));
                 foreach (var authorBook in await authorBooksQuery.ToListAsync())
@@ -30,9 +32,11 @@ namespace Books.Application.Services.Domain
             return results;
         }
 
-        public static async Task<List<Book>> RelatedBooksAsync(this Book book, IBaseUnitOfWork uow)
+        public static async Task<List<Book>?> RelatedBooksAsync(this Book book, IBaseUnitOfWork uow)
         {
             var author = await uow.GetReferenceAsync(book, e => e.Author);
+            if (author == null) { return null; }
+
             var books = await uow.GetReferenceAsync(author, e => e.Books);
             return books;
         }

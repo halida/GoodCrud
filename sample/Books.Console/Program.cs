@@ -38,7 +38,7 @@ namespace Books.Console
             {
                 var result = await client.CreateAsync(new BookCreateUpdateDto() { Title = "a2" });
                 System.Console.WriteLine(JsonConvert.SerializeObject(result));
-                entityId = result.Data.Id;
+                entityId = result.Data!.Id;
             }
             // get
             {
