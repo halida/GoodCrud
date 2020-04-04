@@ -72,7 +72,7 @@ namespace GoodCrud.Client
                 $"{Prefix}/{Controller}/{id}", Method.DELETE);
         }
 
-        public virtual async Task<string> Request(string url, Method method, StringDictionary? options = null, dynamic? data = null)
+        public virtual async Task<string> Request(string url, Method method, Dictionary<string, string>? options = null, dynamic? data = null)
         {
             var client = new RestClient(Website)
             {
@@ -82,9 +82,9 @@ namespace GoodCrud.Client
             var request = new RestRequest(url, method);
             if (options != null)
             {
-                foreach (DictionaryEntry item in options)
+                foreach (var item in options!)
                 {
-                    request.AddParameter((string)item.Key, item.Value);
+                    request.AddQueryParameter(item.Key, item.Value);
                 }
             }
 
@@ -95,9 +95,9 @@ namespace GoodCrud.Client
             return content;
         }
 
-        protected StringDictionary QueryOptions<C>(C c) where C : class
+        protected Dictionary<string, string> QueryOptions<C>(C c) where C : class
         {
-            var options = new StringDictionary();
+            var options = new Dictionary<string, string>();
             foreach (var property in typeof(C).GetProperties())
             {
                 options[property.Name] = Convert.ToString(property.GetValue(c));
@@ -105,7 +105,7 @@ namespace GoodCrud.Client
             return options;
         }
 
-        public virtual async Task<CT> RequestResult<CT>(string url, Method method, StringDictionary? options = null, dynamic? data = null)
+        public virtual async Task<CT> RequestResult<CT>(string url, Method method, Dictionary<string, string>? options = null, dynamic? data = null)
         {
             var content = await Request(url, method, options, data);
             var result = JsonConvert.DeserializeObject<CT>(content);
