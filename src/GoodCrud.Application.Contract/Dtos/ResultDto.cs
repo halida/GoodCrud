@@ -22,9 +22,9 @@ namespace GoodCrud.Application.Contract.Dtos
             return new ResultDto<T> { Status = ResultStatus.NotFound, Description = null, Data = null };
         }
 
-        public static ResultDto<T> Failed(string description = "")
+        public static ResultDto<T> Failed(string description = "", T? obj = null)
         {
-            return new ResultDto<T> { Status = ResultStatus.Failed, Description = description, Data = null };
+            return new ResultDto<T> { Status = ResultStatus.Failed, Description = description, Data = obj };
         }
     }
 
