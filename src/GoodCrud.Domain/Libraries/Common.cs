@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace GoodCrud.Domain.Libraries
@@ -17,6 +18,14 @@ namespace GoodCrud.Domain.Libraries
             if (sort) { result.Sort(); }
 
             return result;
+        }
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
         }
 
     }
