@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using GoodCrud.Data.Contract.Interfaces;
 using GoodCrud.Domain.Contract.Interfaces;
 using URF.Core.EF;
+using System.Collections.Generic;
 
 namespace GoodCrud.Data
 {
@@ -52,6 +53,12 @@ namespace GoodCrud.Data
         public string TableName()
         {
             return Context.Model.FindEntityType(typeof(E)).GetTableName();
+        }
+
+        public async Task BulkInsertAsync(IEnumerable<E> entities)
+        {
+            await Context.AddRangeAsync(entities);
+            await Context.SaveChangesAsync();
         }
     }
 }
