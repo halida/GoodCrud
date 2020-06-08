@@ -31,14 +31,12 @@ namespace GoodCrud.Web.Api.Controllers
             return await _service.ListAsync(filter);
         }
 
-        // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<ResultDto<T>> Get(int id)
         {
             return await _service.GetAsync(id);
         }
 
-        // PUT: api/Categories/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
@@ -47,7 +45,6 @@ namespace GoodCrud.Web.Api.Controllers
             return await _service.UpdateAsync(id, dto);
         }
 
-        // POST: api/Categories
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
@@ -62,7 +59,6 @@ namespace GoodCrud.Web.Api.Controllers
             return await _service.BulkCreateAsync(dtoList);
         }
 
-        // DELETE: api/Categories/5
         [HttpDelete("{id}")]
         public async Task<ResultDto<T>> Delete(int id)
         {
