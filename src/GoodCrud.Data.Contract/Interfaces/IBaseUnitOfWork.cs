@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using GoodCrud.Domain.Contract.Interfaces;
+using Microsoft.EntityFrameworkCore.Storage;
 using URF.Core.Abstractions;
 
 namespace GoodCrud.Data.Contract.Interfaces
@@ -21,5 +22,7 @@ namespace GoodCrud.Data.Contract.Interfaces
 
         IQueryable<TProperty> GetCollectionQuery<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>?>> property)
         where TEntity : class, IIdentifiable where TProperty : class;
+
+        IDbContextTransaction BeginTransaction();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GoodCrud.Data.Contract.Interfaces;
 using GoodCrud.Domain.Contract.Interfaces;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,5 +66,9 @@ namespace GoodCrud.Data
             return Context.Entry(entity).Collection(property).Query();
         }
 
+        public IDbContextTransaction BeginTransaction()
+        {
+            return Context.Database.BeginTransaction();
+        }
     }
 }
