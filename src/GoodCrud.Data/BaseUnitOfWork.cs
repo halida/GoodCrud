@@ -71,12 +71,12 @@ namespace GoodCrud.Data
             return Context.Database.BeginTransaction();
         }
 
-        public async Task WithTransaction(Action<IDbContextTransaction> func)
+        public async Task WithTransaction(Func<IDbContextTransaction, Task> func)
         {
             using var transaction = BeginTransaction();
             try
             {
-                func(transaction);
+                await func(transaction);
                 await transaction.CommitAsync();
             }
             catch (Exception)

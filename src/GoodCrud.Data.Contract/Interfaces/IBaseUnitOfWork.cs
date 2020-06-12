@@ -24,6 +24,6 @@ namespace GoodCrud.Data.Contract.Interfaces
         where TEntity : class, IIdentifiable where TProperty : class;
 
         IDbContextTransaction BeginTransaction();
-        Task WithTransaction(Action<IDbContextTransaction> func);
+        Task WithTransaction(Func<IDbContextTransaction, Task> func);
     }
 }
