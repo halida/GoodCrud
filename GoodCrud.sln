@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11312.210 d18.3
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{30BAB0C7-294B-499E-B3A1-8342F2CDE7F1}"
 EndProject
@@ -49,6 +49,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Data.Contract", "samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Domain.Contract", "sample\Books.Domain.Contract\Books.Domain.Contract.csproj", "{41694D7B-7211-452B-93B7-0E1C2E89D951}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C3F3B39A-5C79-4057-9334-6098AF1C361D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,9 +63,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{219BC3CD-4296-4BF8-9935-D9B3CE48639B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -303,6 +306,9 @@ Global
 		{41694D7B-7211-452B-93B7-0E1C2E89D951}.Release|x86.ActiveCfg = Release|Any CPU
 		{41694D7B-7211-452B-93B7-0E1C2E89D951}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{219BC3CD-4296-4BF8-9935-D9B3CE48639B} = {30BAB0C7-294B-499E-B3A1-8342F2CDE7F1}
 		{7EA59D57-5AC7-4958-8F5B-0A39F70DE477} = {30BAB0C7-294B-499E-B3A1-8342F2CDE7F1}
@@ -324,5 +330,8 @@ Global
 		{18978858-A919-4936-B5CE-DEFF396CC4E5} = {9483847D-C2DA-4E82-90FA-276CE2C9E1D1}
 		{E67780D8-0043-4622-AFD9-1EA45CC06B56} = {30BAB0C7-294B-499E-B3A1-8342F2CDE7F1}
 		{41694D7B-7211-452B-93B7-0E1C2E89D951} = {30BAB0C7-294B-499E-B3A1-8342F2CDE7F1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0AC6CD6B-B168-442F-A9FC-7CFC5BC98B33}
 	EndGlobalSection
 EndGlobal
