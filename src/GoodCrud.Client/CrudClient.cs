@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -39,45 +39,46 @@ namespace GoodCrud.Client
         {
             var options = (filter == null) ? null : QueryOptions(filter);
             return await RequestResult<PagedListDto<T>>(
-                $"{Prefix}/{Controller}", Method.GET, options);
+                $"{Prefix}/{Controller}", Method.Get, options);
         }
 
         public async Task<ResultDto<T>> GetAsync(int id)
         {
             return await RequestResult<ResultDto<T>>(
-                $"{Prefix}/{Controller}/{id}", Method.GET);
+                $"{Prefix}/{Controller}/{id}", Method.Get);
         }
 
         public async Task<ResultDto<T>> UpdateAsync(int id, UpdateT dto)
         {
             return await RequestResult<ResultDto<T>>(
-                $"{Prefix}/{Controller}/{id}", Method.PUT, null, dto);
+                $"{Prefix}/{Controller}/{id}", Method.Put, null, dto);
         }
 
         public async Task<ResultDto<T>> CreateAsync(CreateT dto)
         {
             return await RequestResult<ResultDto<T>>(
-                $"{Prefix}/{Controller}/", Method.POST, null, dto);
+                $"{Prefix}/{Controller}/", Method.Post, null, dto);
         }
 
         public async Task<List<ResultDto<T>>> BulkCreateAsync(List<CreateT> dtoList)
         {
             return await RequestResult<List<ResultDto<T>>>(
-                $"{Prefix}/{Controller}/Bulk", Method.POST, null, dtoList);
+                $"{Prefix}/{Controller}/Bulk", Method.Post, null, dtoList);
         }
 
         public async Task<ResultDto<T>> DeleteAsync(int id)
         {
             return await RequestResult<ResultDto<T>>(
-                $"{Prefix}/{Controller}/{id}", Method.DELETE);
+                $"{Prefix}/{Controller}/{id}", Method.Delete);
         }
 
-        public virtual async Task<string> Request(string url, Method method, Dictionary<string, string>? options = null, dynamic? data = null)
+        public virtual async Task<string> Request(string url, Method method, Dictionary<string, string>? options = null, string? json = null)
         {
-            var client = new RestClient(Website)
+            var client = new RestClient(new RestClientOptions
             {
+                BaseUrl = new Uri(Website),
                 Authenticator = new HttpBasicAuthenticator(Username, Password)
-            };
+            });
 
             var request = new RestRequest(url, method);
             if (options != null)
@@ -88,9 +89,9 @@ namespace GoodCrud.Client
                 }
             }
 
-            if (data != null) { request.AddJsonBody(data); }
+            if (json != null) { request.AddJsonBody(json); }
 
-            IRestResponse response = await client.ExecuteAsync(request);
+            var response = await client.ExecuteAsync(request);
             var content = response.Content;
             return content;
         }
